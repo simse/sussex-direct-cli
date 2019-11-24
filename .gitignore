@@ -1,0 +1,6 @@
+.env
+.vscode
+sussex.db
+sussex.egg-info
+__pycache__
+dist

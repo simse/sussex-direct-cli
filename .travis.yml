@@ -1,0 +1,15 @@
+sudo: false
+language: python
+cache:
+- pip
+install:
+- pip install -r requirements.txt
+- pip install -e .
+script:
+- echo 'Nada!'
+deploy:
+  provider: pypi
+  twine_version: 1.12.1
+  user: simsemand
+  password: ${PASSWORD}
+  skip_existing: true
