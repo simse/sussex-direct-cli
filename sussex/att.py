@@ -1,5 +1,6 @@
 from urllib.parse import parse_qs, urlparse
 from bs4 import BeautifulSoup
+import click
 from tabulate import tabulate
 from sussex import auth
 
@@ -65,11 +66,11 @@ def get_attendance(ignore=[], ignore_optionals=True, print_table=True):
         t['percentage'] = str(t['percentage']) + '%'
 
 
-    print(tabulate(table, headers={
+    click.echo(tabulate(table, headers={
         'module_name': 'Module name',
         'module_code': 'Module code',
         'group_id': 'Group ID',
         'attendance_string': 'Attendance',
         'percentage': 'Percentage',
     }, tablefmt='github'))
-    print('\nYour average attendance is: {}%{}'.format(average, ', ignoring optional modules.' if ignore_optionals else '.'))
+    click.secho('\nYour average attendance is: {}%{}'.format(average, ', ignoring optional modules.' if ignore_optionals else '.'))

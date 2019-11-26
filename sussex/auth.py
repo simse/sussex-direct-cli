@@ -16,7 +16,8 @@ def read_session_id():
         return db.get('session_id')
 
 def clear_session_id():
-    db.rem('session_id')
+    if db.get('session_id'):
+        db.rem('session_id')
 
 
 def get_new_session_id():
@@ -43,22 +44,21 @@ def verify_login_status():
 
 
 def login(force=False):
-    if force or not verify_login_status():
-        requests.post('https://direct.sussex.ac.uk/login.php', data = {
-            'username': db.get('sussex_username'),
-            'password': db.get('sussex_password'),
-            'QUERY_STRING': None,
-            'js_enabled': 0
-        }, cookies = {
-            'PHPSESSID': read_session_id()
-        }, headers={
-            'Sec-Fetch-Mode': 'navigate',
-            'Sec-Fetch-Site': 'same-origin',
-            'Sec-Fetch-User': '?1',
-            'Origin': 'https://direct.sussex.ac.uk',
-            'Referer': 'https://direct.sussex.ac.uk/login.php',
-            'Upgrade-Insecure-Requests': '1'
-        })
+    requests.post('https://direct.sussex.ac.uk/login.php', data = {
+        'username': db.get('sussex_username'),
+        'password': db.get('sussex_password'),
+        'QUERY_STRING': None,
+        'js_enabled': 0
+    }, cookies = {
+        'PHPSESSID': read_session_id()
+    }, headers={
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-User': '?1',
+        'Origin': 'https://direct.sussex.ac.uk',
+        'Referer': 'https://direct.sussex.ac.uk/login.php',
+        'Upgrade-Insecure-Requests': '1'
+    })
 
 
 def make_get(url, payload=None):
