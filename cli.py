@@ -1,5 +1,5 @@
-import auth
-import att
+from sussex import auth
+from sussex import att
 
 from getpass import getpass
 from yaspin import yaspin
@@ -70,4 +70,4 @@ def attendance():
 
 
 if __name__ == '__main__':
-    cli()
+    cli(None)
