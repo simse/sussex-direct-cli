@@ -27,7 +27,7 @@ def average_grade():
 
         module_name = page.select_one('#student_module_marks_subtitle').text
 
-        print(module_name)
+        click.secho(module_name, underline=True)
 
         for row in page.select("#student_module_marks_border tr.formlet_row_other"):
             offset = 1
@@ -67,6 +67,6 @@ def average_grade():
             grade += a['weight'] * (a['mark_percentage'] / 100)
 
         grades.append(grade)
-        print('The weighted grade for this module is: {}%'.format(round(grade, 2)))
+        print('The weighted grade for this module is: \u001b[1m{}%\u001b[0m'.format(round(grade, 2)))
 
-    print('\n\nYou average grade is: {}%'.format(round(sum(grades) / len(grades), 1)))
+    click.secho('\n\nYou average grade is: {}%'.format(round(sum(grades) / len(grades), 1)), bold=True)
