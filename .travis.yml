@@ -10,6 +10,6 @@ script:
 deploy:
   provider: pypi
   twine_version: 1.12.1
-  user: simsemand
-  password: ${PASSWORD}
+  user: __token__
+  password: ${TOKEN}
   skip_existing: true
