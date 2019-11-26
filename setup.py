@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sussex',
-    version='0.5.3',
+    version='0.5.4',
     license='MIT',
     author='Simon Sorensen',
     author_email='hello@simse.io',
@@ -20,6 +20,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        sussex=cli:cli
+        sussex=sussex_cli:cli
     ''',
 )
