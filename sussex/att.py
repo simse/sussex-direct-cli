@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 import click
 from tabulate import tabulate
 
-from sussex.auth import make_get
+from sussex import auth
 
 def get_attendance(ignore=[], ignore_optionals=True, print_table=True):
-    html = make_get('https://direct.sussex.ac.uk/page.php?page=course_progress').text
+    html = auth.make_get('https://direct.sussex.ac.uk/page.php?page=course_progress').text
     page = BeautifulSoup(html, 'lxml')
     attendance_links = []
 

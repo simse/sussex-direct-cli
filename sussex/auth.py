@@ -5,10 +5,10 @@ from pathlib import Path
 
 try:
     os.makedirs(str(Path.home() / '.sussex'))
-except FileExistsError:
+except(FileExistsError):
     pass
 
-db = pickledb.load('.sussex/.auth', False)
+db = pickledb.load(str(Path.home() / '.sussex' / '.auth'), False)
 
 def save_session_id(sessid):
     db.set('session_id', sessid)
