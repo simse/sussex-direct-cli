@@ -1,8 +1,14 @@
+import os
 import pickledb
 import requests
+from pathlib import Path
 
+try:
+    os.makedirs(str(Path.home() / '.sussex'))
+except FileExistsError:
+    pass
 
-db = pickledb.load('sussex.db', False)
+db = pickledb.load('.sussex/.auth', False)
 
 def save_session_id(sessid):
     db.set('session_id', sessid)

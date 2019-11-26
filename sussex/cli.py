@@ -1,6 +1,7 @@
-from sussex import auth
-from sussex import att
+import auth
+import att
 
+from getpass import getpass
 from yaspin import yaspin
 import click
 
@@ -41,10 +42,11 @@ def login(username, password):
         else:
             click.secho('Alright, let\'s get you logged in.\n')
         username = input('Username: ')
-        password = input('Password: ')
+        password = getpass('Password: ')
 
         with yaspin(text='Logging in...') as spinner:
             auth.save_login(username, password)
+            auth.login()
 
             logged_in = auth.verify_login_status()
 
