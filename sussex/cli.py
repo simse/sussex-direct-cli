@@ -1,9 +1,9 @@
-from sussex import auth
-from sussex import att
-
 from getpass import getpass
-from yaspin import yaspin
+
 import click
+from yaspin import yaspin
+
+from sussex import att, auth, grades
 
 
 @click.group(invoke_without_command=True)
@@ -68,6 +68,10 @@ def attendance():
         spinner.write('')
         att.get_attendance()
 
+
+@cli.command()
+def grade():
+    grades.average_grade()
 
 if __name__ == '__main__':
     cli(None)

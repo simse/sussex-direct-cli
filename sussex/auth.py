@@ -41,7 +41,7 @@ def save_login(username, password):
 
 
 def verify_login_status():
-    login(force=True)
+    login()
 
     if make_get('https://direct.sussex.ac.uk/page.php?realm=home').history:
         return False
@@ -49,7 +49,7 @@ def verify_login_status():
         return True
 
 
-def login(force=False):
+def login():
     requests.post('https://direct.sussex.ac.uk/login.php', data = {
         'username': db.get('sussex_username'),
         'password': db.get('sussex_password'),
