@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='sussex',
-    version='0.4',
+    version='0.5.1',
     license='MIT',
     author = 'Simon Sorensen',
     author_email='hello@simse.io',
