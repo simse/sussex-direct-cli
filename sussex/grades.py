@@ -76,4 +76,4 @@ def average_grade():
         reweighted_grades.append(reweighted_grade)
         print('The weighted grade for this module is: \u001b[1m{}%\u001b[0m (\u001b[1m{}%\u001b[0m excluding future)'.format(round(grade, 2), round(reweighted_grade, 2)))
 
-    click.secho('\n\nYou average grade is: {}% ({}% excluding future)'.format(round(sum(grades) / len(grades), 1), round(sum(reweighted_grades) / len(reweighted_grades)) ), bold=True)
+    click.secho('\n\nYour average grade is: {}% ({}% excluding future)'.format(round(sum(grades) / len(grades), 1), round(sum(reweighted_grades) / len(reweighted_grades)) ), bold=True)
