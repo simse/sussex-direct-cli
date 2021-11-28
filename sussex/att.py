@@ -27,22 +27,29 @@ def get_attendance(ignore=[], ignore_optionals=True, print_table=True):
                     while 'Semester' in module_name:
                         module_name = attendance_links[backtrack]['module_name']
                         backtrack -= 1
+                    while 'Autumn' in module_name:
+                        module_name = attendance_links[backtrack]['module_name']
+                        backtrack -= 1
+                    while 'Spring' in module_name:
+                        module_name = attendance_links[backtrack]['module_name']
+                        backtrack -= 1
 
                     backtrack = len(attendance_links) - 1
                     while 'G' not in module_code:
                         module_code = attendance_links[backtrack]['module_code']
                         backtrack -= 1
-
-                    attendance_links.append({
-                        'module_name': module_name,
-                        'module_code': module_code,
-                        'module_id': int(query['rul_code'][0]),
-                        'group_id': int(query['tgo_code'][0]),
-                        'attendance_string': attendance_str,
-                        'total_count': total,
-                        'attended_count': attended,
-                        'percentage': round(attended / total * 100)
-                    })
+                    
+                    if total != 0:
+                        attendance_links.append({
+                            'module_name': module_name,
+                            'module_code': module_code,
+                            'module_id': int(query['rul_code'][0]),
+                            'group_id': int(query['tgo_code'][0]),
+                            'attendance_string': attendance_str,
+                            'total_count': total,
+                            'attended_count': attended,
+                            'percentage': round(attended / total * 100)
+                        })
             except KeyError:
                 pass
 
