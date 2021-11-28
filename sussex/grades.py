@@ -11,6 +11,7 @@ def average_grade():
     page = BeautifulSoup(html, 'lxml')
     grade_links = []
     grades = []
+    reweighted_grades = []
 
     for link in page.find_all('a'):
         try:
@@ -62,11 +63,17 @@ def average_grade():
 
         # Calculate module grade
         grade = 0
-
+        total_weighting = 0
         for a in assessments:
-            grade += a['weight'] * (a['mark_percentage'] / 100)
+            # Mark totals are equal to zero for assignments that have not been marked
+            # So, we should exclude this!
+            if a['mark_total'] > 0:
+                grade += a['weight'] * (a['mark_percentage'] / a['mark_total'])
+                total_weighting += a['weight']
 
         grades.append(grade)
-        print('The weighted grade for this module is: \u001b[1m{}%\u001b[0m'.format(round(grade, 2)))
+        reweighted_grade = (grade / (total_weighting / 100))
+        reweighted_grades.append(reweighted_grade)
+        print('The weighted grade for this module is: \u001b[1m{}%\u001b[0m (\u001b[1m{}%\u001b[0m excluding future)'.format(round(grade, 2), round(reweighted_grade, 2)))
 
-    click.secho('\n\nYou average grade is: {}%'.format(round(sum(grades) / len(grades), 1)), bold=True)
+    click.secho('\n\nYour average grade is: {}% ({}% excluding future)'.format(round(sum(grades) / len(grades), 1), round(sum(reweighted_grades) / len(reweighted_grades)) ), bold=True)
